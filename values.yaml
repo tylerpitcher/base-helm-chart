@@ -1,0 +1,15 @@
+image:
+  repository: 
+  tag: latest
+
+deployment:
+  replicas: 1
+  port: 
+
+route:
+  path: 
+
+ingress:
+  path: 
+  tlsSecretName: tls-secret
+  httpsRedirectMiddleware: https-redirect

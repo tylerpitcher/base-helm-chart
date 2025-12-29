@@ -7,7 +7,7 @@ deployment:
   port:  
 
 ingress:
-  enabled: true
+  enabled: false
   hosts:
     - www.tylerpitcher.com
     - tylerpitcher.com

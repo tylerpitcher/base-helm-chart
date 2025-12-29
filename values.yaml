@@ -7,6 +7,9 @@ deployment:
   port:  
 
 ingress:
-  path: 
+  hosts:
+    - www.tylerpitcher.com
+    - tylerpitcher.com
+  path: /
   tlsSecretName: tls-secret
   httpsRedirectMiddleware: https-redirect

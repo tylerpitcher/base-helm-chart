@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`tylerpitcher.com`, `www.tylerpitcher.com`) && PathPrefix(`{{ .Values.route.path }}`)
+    - match: Host(`tylerpitcher.com`, `www.tylerpitcher.com`) && PathPrefix(`{{ .Values.ingress.path }}`)
       kind: Rule
       services:
         - name: {{ .Release.Name }}-service
@@ -24,7 +24,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`tylerpitcher.com`, `www.tylerpitcher.com`) && PathPrefix(`{{ .Values.route.path }}`)
+    - match: Host(`tylerpitcher.com`, `www.tylerpitcher.com`) && PathPrefix(`{{ .Values.ingress.path }}`)
       kind: Rule
       services:
         - name: {{ .Release.Name }}-service

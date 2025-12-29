@@ -4,10 +4,7 @@ image:
 
 deployment:
   replicas: 1
-  port: 
-
-route:
-  path: 
+  port:  
 
 ingress:
   path: 

@@ -13,7 +13,7 @@ spec:
   minReplicas: {{ .Values.hpa.replicas.min }}
   maxReplicas: {{ .Values.hpa.replicas.max }}
   metrics:
-  {{ if .Value.hpa.utilization.cpu }}
+  {{ if .Values.hpa.utilization.cpu }}
     - type: Resource
       resource:
         name: cpu

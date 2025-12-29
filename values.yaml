@@ -13,6 +13,15 @@ deployment:
       cpu: 200m
       memory: 256Mi
 
+hpa:
+  enabled: false
+  replicas:
+    min:
+    max:
+  utilization:
+    cpu:
+    memory:
+
 ingress:
   enabled: false
   hosts:

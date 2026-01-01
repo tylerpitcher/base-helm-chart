@@ -28,5 +28,5 @@ ingress:
     - www.tylerpitcher.com
     - tylerpitcher.com
   path: /
-  tlsSecretName: tls-secret
+  tlsSecretName: tylerpitcher-tls
   httpsRedirectMiddleware: https-redirect

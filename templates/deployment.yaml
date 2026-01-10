@@ -17,11 +17,21 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: {{ .Values.deployment.port }}
+          {{- with .Values.deployment.resources }}
           resources:
-            {{- toYaml .Values.deployment.resources | nindent 12 }}
-          {{- if .Values.env }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.deployment.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.deployment.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.env }}
           env:
-            {{- range .Values.env }}
+            {{- range . }}
             - name: {{ .name }}
               {{- if .value }}
               value: {{ .value | quote }}

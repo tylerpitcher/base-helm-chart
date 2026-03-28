@@ -1,6 +1,6 @@
 image:
   repository: 
-  tag: latest
+  tag: 
 
 deployment:
   replicas: 1
@@ -12,6 +12,8 @@ deployment:
     limits:
       cpu: 200m
       memory: 256Mi
+
+volumes: []
 
 hpa:
   enabled: false

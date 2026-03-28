@@ -41,3 +41,34 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
+          {{- with .Values.volumes }}
+          volumeMounts:
+            {{- range . }}
+            - name: {{ .id }}
+              mountPath: {{ .mountPath }}
+              {{- if .subPath }}
+              subPath: {{ .subPath }}
+              {{- end }}
+              {{- if .readOnly }}
+              readOnly: true
+              {{- end }}
+            {{- end }}
+          {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- range . }}
+        - name: {{ .id }}
+          {{- if eq .type "pvc" }}
+          persistentVolumeClaim:
+            claimName: {{ .pvc }}
+          {{- else if eq .type "emptyDir" }}
+          emptyDir: {}
+          {{- else if eq .type "configMap" }}
+          configMap:
+            name: {{ .configMap }}
+          {{- else if eq .type "secret" }}
+          secret:
+            secretName: {{ .secret }}
+          {{- end }}
+        {{- end }}
+      {{- end }}

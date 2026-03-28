@@ -13,6 +13,8 @@ deployment:
       cpu: 200m
       memory: 256Mi
 
+env: []
+
 volumes: []
 
 hpa:

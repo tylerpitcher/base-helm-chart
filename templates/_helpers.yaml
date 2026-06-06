@@ -1,3 +1,0 @@
-{{- define "ingress.hostMatcher" -}}
-Host({{ range $i, $h := .Values.ingress.hosts }}{{ if $i }}, {{ end }}`{{ $h }}`{{ end }})
-{{- end }}

@@ -1,0 +1,29 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress
+spec:
+  ingressClassName: traefik
+
+  tls:
+    - hosts:
+{{- range .Values.ingress.hosts }}
+        - {{ . }}
+{{- end }}
+      secretName: {{ .Values.ingress.tlsSecretName }}
+
+  rules:
+{{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: {{ $.Values.ingress.path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $.Release.Name }}-service
+                port:
+                  number: {{ $.Values.deployment.port }}
+{{- end }}
+{{- end }}

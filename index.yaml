@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  base-helm-chart:
+  - apiVersion: v2
+    created: "2026-09-06T20:47:59.274423165Z"
+    description: Basic helm chart for deploying services
+    digest: 71a0a3e457e4b254eb39d302869194aab63a0a80334dffc10633fff018d39fd9
+    name: base-helm-chart
+    type: library
+    urls:
+    - https://tylerpitcher.github.io/base-helm-chart/base-helm-chart-0.10.0.tgz
+    version: 0.10.0
+generated: "2026-09-06T20:47:59.2735714Z"

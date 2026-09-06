@@ -1,3 +1,4 @@
+{{- define "base-helm-chart.hpa" -}}
 {{- if and .Values.hpa.enabled (or .Values.hpa.utilization.cpu .Values.hpa.utilization.memory) }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -13,20 +14,21 @@ spec:
   minReplicas: {{ .Values.hpa.replicas.min }}
   maxReplicas: {{ .Values.hpa.replicas.max }}
   metrics:
-  {{ if .Values.hpa.utilization.cpu }}
+    {{- if .Values.hpa.utilization.cpu }}
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
           averageUtilization: {{ .Values.hpa.utilization.cpu }}
-  {{ end }}
-  {{ if .Values.hpa.utilization.memory }}
+    {{- end }}
+    {{- if .Values.hpa.utilization.memory }}
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
           averageUtilization: {{ .Values.hpa.utilization.memory }}
-  {{ end }}
+    {{- end }}
+{{- end }}
 {{- end }}

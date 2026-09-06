@@ -1,3 +1,4 @@
+{{- define "base-helm-chart.ingress" -}}
 {{- if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -5,16 +6,14 @@ metadata:
   name: {{ .Release.Name }}-ingress
 spec:
   ingressClassName: traefik
-
   tls:
     - hosts:
-{{- range .Values.ingress.hosts }}
+        {{- range .Values.ingress.hosts }}
         - {{ . }}
-{{- end }}
+        {{- end }}
       secretName: {{ .Values.ingress.tlsSecretName }}
-
   rules:
-{{- range .Values.ingress.hosts }}
+    {{- range .Values.ingress.hosts }}
     - host: {{ . }}
       http:
         paths:
@@ -25,5 +24,6 @@ spec:
                 name: {{ $.Release.Name }}-service
                 port:
                   number: {{ $.Values.deployment.port }}
+    {{- end }}
 {{- end }}
 {{- end }}

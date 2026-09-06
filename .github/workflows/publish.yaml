@@ -1,0 +1,48 @@
+name: Publish Helm Chart
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v4
+
+      - name: Package chart
+        run: |
+          mkdir -p dist
+          helm package . --destination dist
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate repository index
+        run: |
+          helm repo index dist \
+            --url https://tylerpitcher.github.io/base-helm-chart/
+
+          cp dist/*.tgz gh-pages/
+          cp dist/index.yaml gh-pages/
+
+      - name: Publish
+        run: |
+          cd gh-pages
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Publish Helm chart ${GITHUB_REF_NAME}" || true
+          git push

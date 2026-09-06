@@ -32,20 +32,16 @@ jobs:
             --version "$VERSION" \
             --destination dist
 
-      - name: Prepare gh-pages
+      - name: Checkout gh-pages
         run: |
-          rm -rf gh-pages
-
           if git ls-remote --exit-code --heads origin gh-pages; then
             git fetch origin gh-pages
             git worktree add gh-pages origin/gh-pages
           else
-            mkdir gh-pages
+            git worktree add --detach gh-pages
             cd gh-pages
-            git init
             git checkout --orphan gh-pages
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git rm -rf . || true
           fi
 
       - name: Generate repository index
@@ -75,14 +71,13 @@ jobs:
           </head>
           <body>
             <h1>Base Helm Chart</h1>
+
             <p>Reusable Helm library chart for deploying services.</p>
 
             <h2>Latest Release</h2>
             <p><strong>$VERSION</strong></p>
 
             <h2>Helm Repository</h2>
-
-            <p>Add this repository to Helm:</p>
 
             <pre>helm repo add base-helm-chart $HELM_REPO_URL
           helm repo update</pre>
@@ -95,15 +90,13 @@ jobs:
 
             <h2>Usage</h2>
 
-            <p>Add the chart as a dependency:</p>
-
             <pre>dependencies:
-            - name: base-helm-chart
-              version: $VERSION
-              repository: $HELM_REPO_URL</pre>
+              - name: base-helm-chart
+                version: $VERSION
+                repository: $HELM_REPO_URL</pre>
 
             <p>
-              <a href="https://github.com/${{ github.repository }}">
+              <a href="${{ github.server_url }}/${{ github.repository }}">
                 View source on GitHub
               </a>
             </p>
@@ -118,7 +111,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add .
+          git add index.html index.yaml *.tgz
 
           git commit \
             -m "chore(release): publish ${GITHUB_REF_NAME}"

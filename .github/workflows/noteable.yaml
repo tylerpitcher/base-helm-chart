@@ -7,6 +7,6 @@ on:
 
 jobs:
   update-notes:
-    uses: tylerpitcher/ci-cd/.github/workflows/noteable.yaml@main
+    uses: tylerpitcher/github-actions/.github/workflows/noteable.yaml@main
     secrets:
       GIT_PAT: ${{ secrets.GIT_PAT }}

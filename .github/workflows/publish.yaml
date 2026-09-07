@@ -7,6 +7,6 @@ on:
 
 jobs:
   publish:
-    uses: tylerpitcher/github-actions/.github/workflows/publish-helm-chart.yml@main
+    uses: tylerpitcher/github-actions/.github/workflows/publish-helm-chart.yaml@main
     permissions:
       contents: write

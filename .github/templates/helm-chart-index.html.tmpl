@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ env.Getenv "CHART_NAME" }}</title>
+</head>
+
+<body>
+    <h1>{{ env.Getenv "CHART_NAME" }}</h1>
+
+    <p>{{ env.Getenv "CHART_DESCRIPTION" }}</p>
+
+    <h2>Latest Release</h2>
+
+    <p>
+        <strong>{{ env.Getenv "CHART_VERSION" }}</strong>
+    </p>
+
+    <h2>Helm Repository</h2>
+
+    <pre>helm repo add {{ env.Getenv "CHART_NAME" }} {{ env.Getenv "HELM_REPO_URL" }}
+helm repo update</pre>
+
+    <h2>Available Charts</h2>
+
+    <p>
+        <a href="index.yaml">View index.yaml</a>
+    </p>
+
+    <h2>Usage</h2>
+
+    <pre>dependencies:
+  - name: {{ env.Getenv "CHART_NAME" }}
+    version: {{ env.Getenv "CHART_VERSION" }}
+    repository: "{{ env.Getenv "HELM_REPO_URL" }}"</pre>
+
+    <p>
+        <a href="{{ env.Getenv "SOURCE_URL" }}">
+            View source on GitHub
+        </a>
+    </p>
+</body>
+</html>

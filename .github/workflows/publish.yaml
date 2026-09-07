@@ -22,9 +22,14 @@ jobs:
       - name: Setup Helm
         uses: azure/setup-helm@v4
 
+      - name: Setup Gomplate
+        uses: hairyhenderson/gomplate-action@v2
+
       - name: Package chart
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
+          VERSION="${VERSION#v}"
 
           mkdir -p dist
 
@@ -58,51 +63,16 @@ jobs:
           fi
 
       - name: Generate website
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
+          SOURCE_URL: ${{ github.server_url }}/${{ github.repository }}
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
+          VERSION="${VERSION#v}"
+          export VERSION
 
-          cat > gh-pages/index.html <<EOF
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Base Helm Chart</title>
-          </head>
-          <body>
-            <h1>Base Helm Chart</h1>
-
-            <p>Reusable Helm library chart for deploying services.</p>
-
-            <h2>Latest Release</h2>
-            <p><strong>$VERSION</strong></p>
-
-            <h2>Helm Repository</h2>
-
-            <pre>helm repo add base-helm-chart $HELM_REPO_URL
-          helm repo update</pre>
-
-            <h2>Available Charts</h2>
-
-            <p>
-              <a href="index.yaml">View index.yaml</a>
-            </p>
-
-            <h2>Usage</h2>
-
-            <pre>dependencies:
-              - name: base-helm-chart
-                version: $VERSION
-                repository: $HELM_REPO_URL</pre>
-
-            <p>
-              <a href="${{ github.server_url }}/${{ github.repository }}">
-                View source on GitHub
-              </a>
-            </p>
-          </body>
-          </html>
-          EOF
+          gomplate \
+            --file .github/templates/helm-chart-index.html.tmpl \
+            --out gh-pages/index.html
 
       - name: Publish
         run: |

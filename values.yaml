@@ -1,6 +1,6 @@
 image:
-  repository: 
-  tag: 
+  repository: ""
+  tag: ""
 
 deployment:
   replicas: 1
@@ -19,12 +19,12 @@ volumes: []
 
 hpa:
   enabled: false
-  replicas:
-    min:
-    max:
+  replicas: 1
+    min: 1
+    max: 2
   utilization:
-    cpu:
-    memory:
+    cpu: 80
+    memory: 80
 
 ingress:
   enabled: false

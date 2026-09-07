@@ -74,11 +74,15 @@ jobs:
 
       - name: Generate website
         env:
-          VERSION: ${{ github.event.release.tag_name }}
+          CHART_VERSION: ${{ github.event.release.tag_name }}
+          HELM_REPO_URL: ${{ env.HELM_REPO_URL }}
           SOURCE_URL: ${{ github.server_url }}/${{ github.repository }}
         run: |
-          VERSION="${VERSION#v}"
-          export VERSION
+          export CHART_NAME="$(helm show chart . | awk '/^name:/ {print $2}')"
+          export CHART_DESCRIPTION="$(helm show chart . | sed -n 's/^description: //p')"
+
+          CHART_VERSION="${CHART_VERSION#v}"
+          export CHART_VERSION
 
           gomplate \
             --file .github/templates/helm-chart-index.html.tmpl \

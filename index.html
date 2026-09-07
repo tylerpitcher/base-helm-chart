@@ -1,45 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>base-helm-chart</title>
-</head>
+        <title>base-helm-chart</title>
 
-<body>
-    <h1>base-helm-chart</h1>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </head>
 
-    <p>Basic helm chart for deploying services</p>
+    <body class="bg-gray-50 text-gray-900">
+        <div class="mx-auto max-w-4xl px-6 py-12">
+            <header class="mb-10">
+                <div class="flex items-center gap-3">
+                    <h1 class="text-4xl font-bold tracking-tight">
+                        base-helm-chart
+                    </h1>
 
-    <h2>Latest Release</h2>
+                    <span class="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700">
+                        v0.15.0
+                    </span>
+                </div>
 
-    <p>
-        <strong>0.14.0</strong>
-    </p>
+                <p class="mt-3 text-lg text-gray-600">
+                    Basic helm chart for deploying services
+                </p>
+            </header>
 
-    <h2>Helm Repository</h2>
+            <!-- Installation -->
+            <section class="mb-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+                <h2 class="text-xl font-semibold">
+                    Helm Repository
+                </h2>
 
-    <pre>helm repo add base-helm-chart https://tylerpitcher.github.io/base-helm-chart/
-helm repo update</pre>
+                <p class="mt-2 text-gray-600">
+                    Add the repository to your Helm installation:
+                </p>
 
-    <h2>Available Charts</h2>
+                <pre class="mt-4 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-gray-100"><code>helm repo add base-helm-chart https://tylerpitcher.github.io/base-helm-chart/
+        helm repo update</code></pre>
+            </section>
 
-    <p>
-        <a href="index.yaml">View index.yaml</a>
-    </p>
+            <section class="mb-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+                <h2 class="text-xl font-semibold">
+                    Usage
+                </h2>
 
-    <h2>Usage</h2>
+                <p class="mt-2 text-gray-600">
+                    Add the chart as a dependency:
+                </p>
 
-    <pre>dependencies:
-  - name: base-helm-chart
-    version: 0.14.0
-    repository: "https://tylerpitcher.github.io/base-helm-chart/"</pre>
+                <pre class="mt-4 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-gray-100"><code>dependencies:
+        - name: base-helm-chart
+            version: 0.15.0
+            repository: "https://tylerpitcher.github.io/base-helm-chart/"</code></pre>
+            </section>
 
-    <p>
-        <a href="https://github.com/tylerpitcher/base-helm-chart">
-            View source on GitHub
-        </a>
-    </p>
-</body>
+            <section class="mb-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+                <h2 class="text-xl font-semibold">
+                    Available Charts
+                </h2>
+
+                <p class="mt-2 text-gray-600">
+                    View all published versions of the chart.
+                </p>
+
+                <a
+                    href="index.yaml"
+                    class="mt-4 inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                >
+                    View index.yaml
+                </a>
+            </section>
+
+            <!-- Links -->
+            <footer class="flex gap-3">
+                <a
+                    href="https://github.com/tylerpitcher/base-helm-chart"
+                    class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                >
+                    View on GitHub
+                </a>
+            </footer>
+
+        </div>
+    </body>
 </html>
